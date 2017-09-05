@@ -16,7 +16,7 @@ class NotificationFragment : BaseFragment() {
     companion object {
         val TAG = Companion.toString()
         fun newInstance(): Fragment {
-            return HomeFragment()
+            return NotificationFragment()
         }
     }
 

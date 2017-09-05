@@ -18,55 +18,36 @@ class MainActivity : AppCompatActivity() ,BottomNavigationView.OnNavigationItemS
         setContentView(R.layout.activity_main)
         ButterKnife.bind(this@MainActivity)
         val homeFragment = HomeFragment.newInstance()
-        supportFragmentManager.beginTransaction().add(homeFragment, HomeFragment.TAG).commit()
+        supportFragmentManager.beginTransaction().add(R.id.fragment_container,homeFragment).commit()
         bottomNavigationBar.setOnNavigationItemSelectedListener(this@MainActivity)
     }
 
 
     /**
-     * 底部导航
+     * 底部导航菜单切换
      */
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         val transaction = supportFragmentManager.beginTransaction()
         var fragment: Fragment? = null
         when (item.itemId) {
             R.id.menu_one -> {
-                fragment = supportFragmentManager.findFragmentByTag(HomeFragment.TAG)
-                if (fragment == null) {
-                    fragment = HomeFragment.newInstance()
-                    transaction.add(fragment, HomeFragment.TAG)
-                }
+                fragment = HomeFragment.newInstance()
             }
             R.id.menu_two -> {
-                fragment = supportFragmentManager.findFragmentByTag(SeeFragment.TAG)
-                if (fragment == null) {
-                    fragment = SeeFragment.newInstance()
-                    transaction.add(fragment, SeeFragment.TAG)
-                }
+                fragment = SeeFragment.newInstance()
             }
             R.id.menu_three -> {
-                fragment = supportFragmentManager.findFragmentByTag(AddFragment.TAG)
-                if (fragment == null) {
-                    fragment = AddFragment.newInstance()
-                    transaction.add(fragment, AddFragment.TAG)
-                }
+                fragment = AddFragment.newInstance()
             }
             R.id.menu_four -> {
-                fragment = supportFragmentManager.findFragmentByTag(NotificationFragment.TAG)
-                if (fragment == null) {
-                    fragment = NotificationFragment.newInstance()
-                    transaction.add(fragment, NotificationFragment.TAG)
-                }
+                fragment = NotificationFragment.newInstance()
             }
             R.id.menu_five -> {
-                fragment = supportFragmentManager.findFragmentByTag(UserFragment.TAG)
-                if (fragment == null) {
-                    fragment = UserFragment.newInstance()
-                    transaction.add(fragment, UserFragment.TAG)
-                }
+                fragment = UserFragment.newInstance()
             }
         }
-        transaction.show(fragment).commit()
+        transaction.replace(R.id.fragment_container,fragment).commit()
         return true
     }
+
 }

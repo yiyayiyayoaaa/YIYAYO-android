@@ -16,7 +16,7 @@ class SeeFragment : BaseFragment() {
     companion object {
         val TAG = Companion.toString()
         fun newInstance(): Fragment {
-            return HomeFragment()
+            return SeeFragment()
         }
     }
 
