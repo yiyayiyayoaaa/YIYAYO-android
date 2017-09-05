@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +14,7 @@ import cx.study.yiyayo.app.base.BaseFragment
 import cx.study.yiyayo.bean.User
 
 /**
+ *
  * Created by cheng.xiao on 2017/9/5.
  */
 
@@ -23,7 +23,6 @@ class HomeFragment : BaseFragment() {
     @BindView(R.id.list_view)
     lateinit var listView: RecyclerView
     companion object {
-        val TAG = Companion.toString()
         fun newInstance(): Fragment {
             return HomeFragment()
         }
@@ -34,9 +33,7 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
-        ButterKnife.bind(this, view)
-        return view
+        return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,9 +53,6 @@ class HomeFragment : BaseFragment() {
 
     class Adapter(var userList: ArrayList<User>) : RecyclerView.Adapter<Adapter.ViewHolder>() {
 
-        init {
-            Log.d("dad", userList.size.toString())
-        }
         override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
 
         }

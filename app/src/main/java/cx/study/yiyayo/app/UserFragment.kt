@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import cx.study.yiyayo.app.base.BaseFragment
 
 /**
+ *
  * Created by cheng.xiao on 2017/9/5.
  */
 
 class UserFragment : BaseFragment() {
 
     companion object {
-        val TAG = Companion.toString()
         fun newInstance(): Fragment {
             return UserFragment()
         }
