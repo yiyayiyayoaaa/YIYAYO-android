@@ -5,10 +5,8 @@
     android:layout_height="match_parent"
     >
 
-    <com.hdl.mricheditor.view.MRichEditor
-        android:id="@+id/mre_editor"
+    <org.xwalk.core.XWalkView
+        android:id="@+id/x_walk_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </com.hdl.mricheditor.view.MRichEditor>
+        android:layout_height="match_parent"/>
 </LinearLayout>

@@ -1,5 +1,6 @@
 package cx.study.yiyayo
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
@@ -7,7 +8,11 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import butterknife.BindView
 import butterknife.ButterKnife
-import cx.study.yiyayo.app.*
+import cx.study.yiyayo.app.HomeFragment
+import cx.study.yiyayo.app.NotificationFragment
+import cx.study.yiyayo.app.SeeFragment
+import cx.study.yiyayo.app.UserFragment
+import cx.study.yiyayo.app.article.ArticleActivity
 
 class MainActivity : AppCompatActivity() ,BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -37,7 +42,9 @@ class MainActivity : AppCompatActivity() ,BottomNavigationView.OnNavigationItemS
                 fragment = SeeFragment.newInstance()
             }
             R.id.menu_three -> {
-                fragment = AddFragment.newInstance()
+               // fragment = AddFragment.newInstance()
+                startActivity(Intent(this@MainActivity, ArticleActivity::class.java))
+                return true
             }
             R.id.menu_four -> {
                 fragment = NotificationFragment.newInstance()

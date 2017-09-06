@@ -1,1 +1,3 @@
 include ':app'
+include ':xwalk_core_library'
+include ':xwalk_shared_library'

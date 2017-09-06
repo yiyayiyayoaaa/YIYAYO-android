@@ -22,8 +22,8 @@ open class BaseFragment: Fragment() {
         binder = ButterKnife.bind(this, view)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         binder?.unbind()
     }
 }

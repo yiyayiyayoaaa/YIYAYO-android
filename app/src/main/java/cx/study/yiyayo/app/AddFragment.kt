@@ -1,18 +1,14 @@
 package cx.study.yiyayo.app
 
-import android.app.Activity.RESULT_CANCELED
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import butterknife.BindView
-import com.hdl.mricheditor.bean.CamaraRequestCode
-import com.hdl.mricheditor.view.MRichEditor
 import cx.study.yiyayo.R
 import cx.study.yiyayo.app.base.BaseFragment
+import org.xwalk.core.XWalkView
 
 
 /**
@@ -22,8 +18,8 @@ import cx.study.yiyayo.app.base.BaseFragment
 
 class AddFragment : BaseFragment() {
 
-    @BindView(R.id.mre_editor)
-    lateinit var editor: MRichEditor
+    @BindView(R.id.x_walk_view)
+    lateinit var xWalkView: XWalkView
     companion object {
         fun newInstance(): Fragment {
             return AddFragment()
@@ -40,28 +36,24 @@ class AddFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        xWalkView.loadUrl("file:///android_asset/hello.html")
     }
 
-    /**
-     * 需要重写这个方法选择图片、拍照才有用哦
+    override fun onPause() {
+        super.onPause()
+        xWalkView.pauseTimers()
+        xWalkView.onHide()
+    }
 
-     * @param requestCode
-     * *
-     * @param resultCode
-     * *
-     * @param data
-     */
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == RESULT_CANCELED) {
-            Toast.makeText(context, "取消操作", Toast.LENGTH_LONG).show()
-            return
-        }
-        if (requestCode == CamaraRequestCode.CAMARA_GET_IMG) {
-            editor.insertImg(data!!.data)
-        } else if (requestCode == CamaraRequestCode.CAMARA_TAKE_PHOTO) {
-            editor.insertImg(data)
-        }
+    override fun onResume() {
+        super.onResume()
+        xWalkView.resumeTimers()
+        xWalkView.onShow()
+    }
+
+    override fun onDestroyView() {
+        xWalkView.onDestroy()
+        super.onDestroyView()
     }
 
 }
