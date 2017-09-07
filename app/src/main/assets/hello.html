@@ -2,7 +2,11 @@
 <!-- Include stylesheet -->
 <link href="http://cdn.quilljs.com/1.3.2/quill.snow.css" rel="stylesheet"/>
 <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<link href="http://cdn.quilljs.com/1.0.0/quill.bubble.css" rel="stylesheet">
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
 <!-- Create the editor container -->
+
 <div id="editor">
 </div>
 
@@ -43,11 +47,19 @@ function showImageUI(){
 }
 toolbar.addHandler('image', showImageUI);
 
-function loadImage(str) {
-    var tag = "<img src='data:image/jpeg;base64," + str + "'>";
-    $('.ql-editor').append(tag);
+function loadImage(tag) {
+    <!--$('.ql-editor').append(tag);-->
+    var range = quill.getSelection();
+    quill.insertEmbed(range.index,'image', tag);
 }
 
+function getContent(){
+    return  quill.container.firstChild.innerHTML;
+}
+
+$('.ql-toolbar').addClass('navbar-fixed-top');
+$('.ql-toolbar').css('background-color','#ffffff');
+$('.ql-editor').css('padding-top',$('.ql-toolbar').css('height'));
 </script>
 <!-- Initialize Quill editor -->
 </html>

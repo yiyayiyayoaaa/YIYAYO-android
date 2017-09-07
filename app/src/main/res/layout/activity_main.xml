@@ -13,14 +13,56 @@
         android:layout_width="match_parent"
         android:layout_height="0dp">
     </FrameLayout>
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bottom_navigation_bar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_gravity="bottom"
-        android:layoutMode="clipBounds"
-        app:menu="@menu/menu_main"
-        android:background="@android:color/white"
-        />
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:orientation="horizontal"
+            android:id="@+id/radio_group"
+            android:background="@android:color/white"
+            >
+            <RadioButton
+                style="@style/home_radio_style"
+                android:id="@+id/radio_home"
+                android:drawableTop="@drawable/ic_control_point_black_24dp"
+                android:text="首页"
+                />
+            <RadioButton
+                android:id="@+id/radio_see"
+                style="@style/home_radio_style"
+                android:drawableTop="@drawable/ic_visibility_black_24dp"
+                android:text="发现"
+                />
+            <ImageButton
+                android:id="@+id/radio_add"
+                style="@style/home_radio_style"
+                android:background="@null"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_add_black_24dp"
+                />
+            <RadioButton
+                android:id="@+id/radio_notification"
+                style="@style/home_radio_style"
+                android:drawableTop="@drawable/ic_notifications_black_24dp"
+                android:text="通知"
+                />
+            <RadioButton
+                android:id="@+id/radio_user"
+                style="@style/home_radio_style"
+                android:drawableTop="@drawable/ic_person_black_24dp"
+                android:text="个人中心"
+                />
+
+        </RadioGroup>
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottom_navigation_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_gravity="bottom"
+            android:layoutMode="clipBounds"
+            app:menu="@menu/menu_main"
+            android:visibility="gone"
+
+            />
+
 
 </LinearLayout>
