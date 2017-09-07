@@ -8,11 +8,11 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.util.Base64
+import android.webkit.JavascriptInterface
+import android.webkit.WebView
 import butterknife.BindView
 import cx.study.yiyayo.R
 import cx.study.yiyayo.app.base.BaseActivity
-import org.xwalk.core.JavascriptInterface
-import org.xwalk.core.XWalkView
 import java.io.ByteArrayOutputStream
 
 
@@ -23,8 +23,8 @@ import java.io.ByteArrayOutputStream
 
 open class ArticleActivity : BaseActivity() {
 
-    @BindView(R.id.x_walk_view)
-    lateinit var xWalkView: XWalkView
+    @BindView(R.id.web_view)
+    lateinit var webView: WebView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +33,8 @@ open class ArticleActivity : BaseActivity() {
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        xWalkView.addJavascriptInterface(SelectImageInterface(this@ArticleActivity), "SelectImage")
-        xWalkView.loadUrl("file:///android_asset/hello.html")
+        webView.addJavascriptInterface(SelectImageInterface(this@ArticleActivity), "SelectImage")
+        webView.loadUrl("file:///android_asset/hello.html")
     }
 
     class SelectImageInterface(private var context: Activity){
@@ -60,14 +60,14 @@ open class ArticleActivity : BaseActivity() {
                         val inputStream = contentResolver.openInputStream(uri)
                         val bitmap = BitmapFactory.decodeStream(inputStream)
                         val str =  bitmapToString(bitmap)
-                        xWalkView.evaluateJavascript("javascript:loadImage($str)",null)
+                        webView.evaluateJavascript("javascript:loadImage($str)",null)
                     }
                 }
             }
         }
     }
 
-    fun bitmapToString(bitmap: Bitmap): String? {
+    private fun bitmapToString(bitmap: Bitmap): String? {
         //将Bitmap转换成字符串
         val string: String?
         val bStream = ByteArrayOutputStream()
@@ -79,23 +79,12 @@ open class ArticleActivity : BaseActivity() {
 
     override fun onPause() {
         super.onPause()
-        xWalkView.pauseTimers()
-        xWalkView.onHide()
+        webView.pauseTimers()
     }
 
     override fun onResume() {
         super.onResume()
-        xWalkView.resumeTimers()
-        xWalkView.onShow()
-    }
-
-    override fun onDestroy() {
-        xWalkView.onDestroy()
-        super.onDestroy()
-    }
-
-    override fun onNewIntent(intent: Intent) {
-        xWalkView.onNewIntent(intent)
+        webView.resumeTimers()
     }
 
 }
